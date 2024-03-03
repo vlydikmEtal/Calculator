@@ -1,3 +1,4 @@
+
 const display = document.querySelector('.display')
 const digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
 const action = ['+', '-', '/', '*']
@@ -8,6 +9,8 @@ let a = ''
 let b = ''
 let sign = ''
 let result = false
+
+
 
 const clearAll = () => {
   a = ''
@@ -25,22 +28,35 @@ buttons.addEventListener('click', (e) => {
 
   if(digit.includes(key)) {
     if(b === '' && sign === '') {
-      a += key
-      display.textContent = a
+      if(key === '.' && a.includes('.')){
+        a += ''
+        display.textContent = a
+      } else if (key === '0' && a === '0'){
+        a += ''
+        display.textContent = a
+      } else {
+        a += key
+        display.textContent = a
+      }
     } else if (a !== '' && sign !== '' && result) {
       b = key
       display.textContent = b
       result = false
     } else {
-      b += key
-      display.textContent = b
+      if(key === '.' && b.includes('.')){
+        b += ''
+        display.textContent = b
+      } else {
+        b += key
+        display.textContent = b
+      }
     }
   } else if (action.includes(key)) {
     sign = key
     display.textContent = sign
     return
-  }
-
+  } 
+  
   if(key === '+/-') {
     a = Number(a) * -1
     display.textContent = a
@@ -53,6 +69,7 @@ buttons.addEventListener('click', (e) => {
     display.textContent = a
   }
   
+
   if(key === '=') {
     if (b === '') b = a
     switch (sign) {
@@ -78,9 +95,8 @@ buttons.addEventListener('click', (e) => {
     }
 
     result = true
-    display.textContent = a = Math.floor(parseFloat(a) * 10) / 10
-    console.log(a)
+    display.textContent = Math.floor(parseFloat(a) * 10) / 10
   }
 })
-
+console.log(resultAll)
 // ебать я мощный нахуй
